@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <template id="myapp">
+            <div>
+                saying something
+                <slot>没有分发内容</slot>
+                <h2>this is mycomponent</h2>
+            </div>
+
+
+        </template>
+        <div id="app">
+            <my-component><h1>nihaso</h1></my-component>
+            <my-component></my-component>
+        </div>
+
+    </body>
+    <script src="vue.js"></script>
+    <script>
+        Vue.component('my-component', {
+		template: '#myapp'
+	});
+        var vm=new Vue({
+            el:'#app'
+        })
+    </script>
+
+</html>

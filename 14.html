@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="v-for-object">
+      <select v-model="selecte">
+        <option disabled value="">请选择</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <span>Selected: {{ selecte }}</span>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+      el: '#v-for-object',
+      data: {
+        selecte:'one'
+      }
+    })
+    </script>
+
+</body>
+</html>

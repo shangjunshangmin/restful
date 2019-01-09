@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="demo.css" />
+	</head>
+
+	<body>
+        <div id="app">
+            <div id="searchBar">
+                Search
+                <input type="text" v-model="searchQuery" />
+            </div>
+            <simple-component :data="gridData" :columns="gridColumns" :filter-key="searchQuery"></simple-component>
+        </div>
+        <template id="grid-template">
+            <table>
+                <thead>
+                    <tr>
+                        <th v-for="(col,index) in columns">
+                            {{ col }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in filteredData">
+                        <td>
+                            {{ item.name }}
+                        </td>
+                        <td>
+                            {{ item.age }}
+                        </td>
+                        <td>
+                            {{ item.sex }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </template>
+    </body>
+    <script src="vue.js"></script>
+    <script>
+
+        Vue.component('simple-component', {
+            template: "#grid-template",
+            props: {
+                data: Array,
+                columns: Array,
+                filterKey: String
+            },
+            computed: {
+                filteredData: function () {
+                    var self = this;
+                    return self.data.filter(function (item) {
+                        return item.name.indexOf(self.filterKey) !== -1;
+                    })
+                }
+            }
+        });
+
+        var demo = new Vue({
+            el: "#app",
+            data: {
+                searchQuery: '',
+                gridColumns: ['name', 'age', 'sex'],
+                gridData: [
+                    {
+                        name: 'jack',
+                        age: 12,
+                        sex: 'female'
+                    },
+                    {
+                        name: 'tom',
+                        age: 13,
+                        sex: 'male'
+                    },
+                    {
+                        name: 'jam',
+                        age: 14,
+                        sex: 'male'
+                    }
+                ]
+            }
+
+        });
+
+    </script>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="form-group">
+                <label>Search</label>
+                <input type="text" class="search-input" v-model="searchQuery"/>
+            </div>
+
+        </div>
+        <div class="container">
+            <simple-grid :data-list="people" :columns="columns" :search-key="searchQuery">
+            </simple-grid>
+        </div>
+    </div>
+
+    <template id="grid-template">
+        <table>
+            <thead>
+                <tr>
+                    <th v-for="col in columns">
+                        {{ col.name }}
+                    </th>
+                    <th>
+                        Delete
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(entry,index) in filteredData ">
+                    <td>{{ entry.name }}</td>
+                    <td>{{ entry.age }}</td>
+                    <td>{{ entry.sex }}</td>
+                    <td class="text-center">
+                        <button v-on:click="deleteItem(index)">delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="container">
+            <button v-on:click="openNewItemDialog('Create New Item')">Create</button>
+        </div>
+        <modal-dialog :mode="mode" :title="title" :fields="columns" :item="item">
+	    </modal-dialog>
+    </template>
+    <template id="dialog-template">
+        <div class="dialogs">
+            <div class="dialog">
+                <div class="dialog-content">
+                    <header class="dialog-header">
+                        <h1 class="dialog-title">{{ title }}</h1>
+                    </header>
+                    <footer class="dialog-footer">
+                        <div class="form-group">
+                            <label></label>
+                            <button v-on:click="save">Save</button>
+                            <button v-on:click="close">Close</button>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+            <div class="dialog-overlay"></div>
+        </div>
+    </template>
+
+    <script src="vue.js"></script>
+    <script>
+        Vue.component('simple-grid', {
+            template: '#grid-template',
+            props: ['dataList', 'columns', 'searchKey',],
+            data: function() {
+					return {
+						mode: 0,
+						title: '',
+						item: {}
+					}
+				},
+            methods: {
+                deleteItem: function(index) {
+                    this.dataList.splice(index, 1);
+                },
+            },
+             computed: {
+                filteredData: function () {
+                    var self = this;
+                    return self.dataList.filter(function (item) {
+                        return item.name.indexOf(self.searchKey) !== -1;
+                    })
+                }
+            },
+            components: {
+		'modal-dialog': {
+			template: '#dialog-template',
+			data: function() {
+				return {
+					// 对话框默认是不显示的
+					show: false
+				}
+			},
+
+				}},
+            props: ['mode', 'title', 'fields', 'item'],
+            methods: {
+				close: function() {
+					this.show = false
+				},
+				save: function() {
+
+        }}});
+
+        var demo = new Vue({
+            el: '#app',
+            data: {
+                searchQuery: '',
+                columns: [{
+                    name: 'name'
+                }, {
+                    name: 'age'
+                }, {
+                    name: 'sex'
+                }],
+                people: [{
+                    name: 'Jack',
+                    age: 30,
+                    sex: 'Male'
+                }, {
+                    name: 'Bill',
+                    age: 26,
+                    sex: 'Male'
+                }, {
+                    name: 'Tracy',
+                    age: 22,
+                    sex: 'Female'
+                }, {
+                    name: 'Chris',
+                    age: 36,
+                    sex: 'Male'
+                }]
+            }
+        })
+    </script>
+
+</body>
+</html>
