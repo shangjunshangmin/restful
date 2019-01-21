@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'reversion',
     'rest_framework',
     'corsheaders',
+    'rest_framework.authtoken',
 
 ]
 
@@ -65,6 +66,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
 ]
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'restful_f.urls'
 
@@ -139,6 +141,10 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = False
+AUTHENTICATION_BACKENDS = (
+    'user.views.CustomBackend',
+)
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
@@ -149,4 +155,10 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
+    "DEFAULT_AUTHENTICATION_CLASSES'": (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
 }
+

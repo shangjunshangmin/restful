@@ -34,7 +34,7 @@ class GoodsType(models.Model):
         null=True,
         blank=True,
         verbose_name="父类目级别",
-        help_text="父目录", on_delete=models.CASCADE,related_name='sub_cat'
+        help_text="父目录", on_delete=models.CASCADE,related_name="sub_cat"
     )
     is_type = models.BooleanField(default=False, verbose_name="是否导航", help_text="是否导航")
     add_time = models.DateField(default=datetime.now, verbose_name="添加时间", help_text='添加时间')

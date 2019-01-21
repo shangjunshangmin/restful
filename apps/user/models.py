@@ -10,11 +10,11 @@ class UserProfile(AbstractUser):
     """
     用户
     """
-    name = models.CharField(
+    username = models.CharField(
         max_length=32,
         null=True,
         blank=True,
-        verbose_name='用户名')
+        verbose_name='用户名', unique=True)
     birthday = models.DateField(null=True, blank=True, verbose_name='出生年月日')
     phone = models.CharField(null=False,blank=False, verbose_name='手机号码', max_length=11)
     gender = models.CharField(max_length=20, choices=(

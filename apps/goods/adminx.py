@@ -9,8 +9,7 @@ class GoodTypeAdmin(object):
     # 商品种类
     list_display = ['name', 'category_type', 'parent_type', 'add_time']
     search_fields = ['name', ]
-    list_filter = ['name', ]
-    relfield_style = 'fk-ajax'
+    list_filter = ['name', 'code','category_type']
 
 
 class BrandAdmin(object):
@@ -18,7 +17,7 @@ class BrandAdmin(object):
     list_display = ['category', 'name', 'desc', 'image', 'add_time']
     list_filter = ['add_time', 'name']
     search_fields = ['name']
-    relfield_style = 'fk-ajax'
+    # relfield_style = 'fk-ajax'
 
 
 class GoodsAdmin(object):
@@ -34,7 +33,7 @@ class GoodsAdmin(object):
         # 小轮播图GoodsAdmin
         model = GoodsImage
         extra = 0
-        relfield_style = 'fk-ajax'
+        # relfield_style = 'fk-ajax'
 
     inlines = [GoodsImage, ]
 
@@ -42,7 +41,7 @@ class GoodsAdmin(object):
 class CarouselAdmin(object):
     # 大轮播图
     list_display = ['goods', 'image', 'index', 'add_time']
-    relfield_style = 'fk-ajax'
+    # relfield_style = 'fk-ajax'
 
 
 class HotSearchWordsAdmin(object):
@@ -52,7 +51,7 @@ class HotSearchWordsAdmin(object):
 class IndexAdAdmin(object):
     # 首页商品类别广告
     list_display = ["goods"]
-    relfield_style = 'fk-ajax'
+    # relfield_style = 'fk-ajax'
 
 
 xadmin.site.register(GoodsType, GoodTypeAdmin)
