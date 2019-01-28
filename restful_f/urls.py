@@ -23,10 +23,13 @@ from goods.views import GoodsList,GoodsTypeList
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 from rest_framework_jwt.views import obtain_jwt_token
+from user.views import SmsCodeViewset,UserViewset
 # 创建路由器并注册我们的视图。
 router = DefaultRouter()
 router.register(r'goods', GoodsList,base_name='goods')
 router.register(r'categorys', GoodsTypeList,base_name='goodstype')
+router.register(r'code', SmsCodeViewset,base_name='code')
+router.register(r'users', UserViewset, base_name="users")
 urlpatterns = [
     url('admin/', xadmin.site.urls),
     url(r'^ueditor/',include('DjangoUeditor.urls')),

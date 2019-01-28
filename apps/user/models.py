@@ -38,7 +38,7 @@ class Code(models.Model):
     # 电话验证码
     code = models.CharField(max_length=15, verbose_name='验证码')
     mobile = models.CharField(max_length=11, verbose_name='手机号码')
-    add_time = models.DateField(verbose_name='添加时间', default=datetime.now)
+    add_time = models.DateTimeField(verbose_name='添加时间', default=datetime.now)
 
     class Meta:
         verbose_name = '验证码'

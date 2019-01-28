@@ -38,3 +38,4 @@ class GoodsTypeList(viewsets.GenericViewSet, mixins.ListModelMixin,mixins.Retrie
 
     queryset = GoodsType.objects.filter(category_type=1).all()
     serializer_class = GoodsTypeSerializer
+    print(queryset)

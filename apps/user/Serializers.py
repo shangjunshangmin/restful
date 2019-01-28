@@ -45,7 +45,7 @@ class UserRegSerializer(serializers.ModelSerializer):
     # 验证用户名是否存在
     username = serializers.CharField(label="用户名", help_text="用户名", required=True, allow_blank=False,
                                      validators=[UniqueValidator(queryset=User.objects.all(), message="用户已经存在")])
-    password = serializers.CharField(label='密码', help_text='请输入密码', required=True, allow_blank=False, write_only=True,
+    password = serializers.CharField(label='密码', help_text='请输入密码',  write_only=True,
                                      style={'input_type': 'password'}, max_length=8, min_length=8,
                                      error_messages={"max_length": "密码必须为8位数", "min_length": "密码必须为8位数",
                                                      "blank": "请输入验证码", })

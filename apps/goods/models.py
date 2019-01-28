@@ -34,7 +34,7 @@ class GoodsType(models.Model):
         null=True,
         blank=True,
         verbose_name="父类目级别",
-        help_text="父目录", on_delete=models.CASCADE,related_name="sub_cat"
+        help_text="父目录", on_delete=models.CASCADE, related_name="sub_cat"
     )
     is_type = models.BooleanField(default=False, verbose_name="是否导航", help_text="是否导航")
     add_time = models.DateField(default=datetime.now, verbose_name="添加时间", help_text='添加时间')
@@ -121,12 +121,9 @@ class Goods(models.Model):
 
 class GoodsImage(models.Model):
     # 轮播小图
-    goods = models.ForeignKey(
-        Goods,
-        verbose_name="商品",
-        on_delete=models.CASCADE)
+    goods = models.ForeignKey(Goods, verbose_name="商品", related_name="image",on_delete=models.CASCADE)
     image = models.ImageField(upload_to='goods/images/', verbose_name="轮播图片")
-    add_image = models.DateField(default=datetime.now,verbose_name='添加时间')
+    add_image = models.DateField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:
         verbose_name = '轮播图'
@@ -172,9 +169,9 @@ class HotSearchWords(models.Model):
 
 
 class IndexAd(models.Model):
-    goods = models.ForeignKey(Goods, on_delete=models.CASCADE,verbose_name='商品ID')
+    goods = models.ForeignKey(Goods, on_delete=models.CASCADE, verbose_name='商品ID')
 
-    category = models.ForeignKey(GoodsType, related_name='category', verbose_name="商品类目",on_delete=models.CASCADE)
+    category = models.ForeignKey(GoodsType, related_name='category', verbose_name="商品类目", on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = '首页商品类别广告'

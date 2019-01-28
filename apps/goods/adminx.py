@@ -21,11 +21,11 @@ class BrandAdmin(object):
 
 
 class GoodsAdmin(object):
-    list_display = ['type', 'goods_sn', 'name', 'click_num', 'sold_num', 'fav_num', 'good_nums', 'market_price',
+    list_display = ['id','type', 'goods_sn', 'name', 'click_num', 'sold_num', 'fav_num', 'good_nums', 'market_price',
                     'shop_price', 'goods_brief', 'goods_des', 'ship_free', 'goods_front_image', 'is_new', 'is_hot']
     search_fields = ['name', ]
     list_editable = ['is_host', ]
-    list_filter = ['click_num', 'sold_num', 'fav_num', 'good_nums', 'market_price',
+    list_filter = ['id','click_num', 'sold_num', 'fav_num', 'good_nums', 'market_price',
                    'shop_price', 'is_new', 'is_hot']
     style_fields = {"goods_des": "ueditor"}
 

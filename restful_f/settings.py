@@ -145,7 +145,6 @@ AUTHENTICATION_BACKENDS = (
     'user.views.CustomBackend',
 )
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')
@@ -162,3 +161,12 @@ REST_FRAMEWORK = {
     ),
 }
 
+api_key = '2244c6946f6bdb84f126286e9ff084d7'
+import datetime
+
+# 有效期限
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=4),
+    'JWT_AUTH_HEADER_PREFIX': 'JWT',
+}
+REGEX_MOBILE = "^1[358]\d{9}$|^147\d{8}$|^176\d{8}$"
